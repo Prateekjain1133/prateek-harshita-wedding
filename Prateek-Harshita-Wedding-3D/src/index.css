@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ivory: #fbf7ef; --gold: #b9975b; --goldlight: #e6c77e; --maroon: #2a0d13; --wine: #4a1722; --emerald: #14382f; --ink: #49363a; --brown: #542b32;
+}
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--ivory); color: var(--ink);
+  font-family: 'Cormorant Garamond', 'Tiro Devanagari Hindi', serif; font-size: 18px; overflow-x: hidden;
+}
+section { scroll-margin-top: 94px; }
+
+/* ---------- global backdrop: page video + falling petals ---------- */
+@keyframes fall { 0% { transform: translate3d(0,-10vh,0) rotate(0); opacity: 0 } 10% { opacity: .7 } 100% { transform: translate3d(60px,110vh,0) rotate(360deg); opacity: 0 } }
+.petal { position: fixed; top: 0; width: 12px; height: 16px; border-radius: 70% 0 70% 0; background: #ebcbcb; pointer-events: none; z-index: 5; animation: fall linear infinite; }
+.wedding-video-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: var(--ivory); }
+.wedding-video-bg video { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 1; filter: brightness(1) saturate(1.08) contrast(1.03); }
+.wedding-video-overlay { position: absolute; inset: 0; background: rgba(251,247,239,.08); }
+/* ivory sections let a little of the film show through; dark bands are solid */
+main > section { background: rgba(251,247,239,.34); }
+/* first section after the hero: solid under the scalloped edge, then fades so the film shows */
+main > section.scratch-section { background: linear-gradient(180deg, #fbf7ef 0, #fbf7ef 40px, rgba(251,247,239,.34) 260px); }
+/* keep headings readable straight over the video */
+main > section:not(.hero-night):not(.section-wine):not(.section-emerald) header h2,
+main > section:not(.hero-night):not(.section-wine):not(.section-emerald) header p { text-shadow: 0 0 16px rgba(251,247,239,.95), 0 0 5px rgba(251,247,239,.95); }
+
+/* ---------- navigation ---------- */
+.wedding-nav { background: rgba(251,247,239,.94); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(185,151,91,.42); box-shadow: 0 8px 30px rgba(53,30,30,.08); }
+.wedding-nav-link { position: relative; display: inline-flex; align-items: center; padding: 13px 12px; font-size: 17px; letter-spacing: .05em; color: #60484a; transition: color .25s ease; }
+.wedding-nav-link::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 5px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); transform: scaleX(0); transition: transform .28s ease; }
+.wedding-nav-link:hover, .wedding-nav-link.is-active { color: var(--brown); }
+.wedding-nav-link:hover::after, .wedding-nav-link.is-active::after { transform: scaleX(1); }
+.wedding-mobile-menu { background: rgba(251,247,239,.985); border-top: 1px solid rgba(185,151,91,.22); box-shadow: 0 16px 24px rgba(75,53,38,.08); }
+.wedding-mobile-link { color: #60484a; transition: background .2s ease, color .2s ease; }
+.wedding-mobile-link:hover, .wedding-mobile-link.is-active { color: var(--brown); background: rgba(185,151,91,.13); }
+
+/* ---------- hero ---------- */
+.hero-night {
+  color: var(--ivory);
+  background:
+    radial-gradient(ellipse at 50% 46%, rgba(150,52,72,.55) 0%, rgba(74,23,34,.0) 58%),
+    radial-gradient(circle at 0% 100%, rgba(20,56,47,.75), transparent 46%),
+    radial-gradient(circle at 100% 0%, rgba(20,56,47,.55), transparent 40%),
+    linear-gradient(180deg, #3a1119 0%, #2a0d13 55%, #1d080d 100%);
+}
+.hero-mandala { position: absolute; left: 50%; top: 52%; width: min(150vw, 1100px); translate: -50% -50%; color: var(--goldlight); opacity: .14; animation: spin-r 160s linear infinite; pointer-events: none; }
+.hero-greeting { color: #fff3d1; padding: 4px 22px; border-radius: 999px; background: rgba(42,13,19,.62); border: 1px solid rgba(230,199,126,.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); text-shadow: 0 1px 8px rgba(20,4,8,.9); }
+.hero-text-shadow { text-shadow: 0 2px 18px rgba(20,4,8,.75); }
+.hero-cta { display: inline-flex; align-items: center; gap: 10px; padding: 13px 30px; border-radius: 999px; background: linear-gradient(135deg, #f1d58e, #c9a24e 55%, #a87f35); color: #2a0d13; font-weight: 600; font-size: 18px; box-shadow: 0 10px 28px rgba(0,0,0,.3); transition: transform .25s, box-shadow .25s; }
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,.38); }
+.scallop { position: absolute; left: 0; right: 0; bottom: -1px; height: 26px; z-index: 2; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='26' viewBox='0 0 52 26'%3E%3Cpath d='M0 26C0 10 11 2 26 2s26 8 26 24z' fill='%23FBF7EF'/%3E%3C/svg%3E") repeat-x bottom / 52px 26px; }
+@keyframes spin-r { to { rotate: 360deg; } }
+.spin-slow { animation: spin-r 160s linear infinite; }
+
+/* ---------- entrance: 3D palace doors ---------- */
+.door { position: absolute; top: 0; bottom: 0; width: 50%; backface-visibility: hidden; will-change: transform;
+  background: linear-gradient(90deg, #34101a, #4a1722 55%, #3a1119); }
+.door-left { border-right: 3px solid #c9a24e; box-shadow: inset -18px 0 40px rgba(0,0,0,.35); }
+.door-right { border-left: 3px solid #c9a24e; box-shadow: inset 18px 0 40px rgba(0,0,0,.35); }
+.door-arch { position: absolute; inset: 6% 10% 6%; border: 2px solid #c9a24e; border-radius: 999px 999px 8px 8px; box-shadow: inset 0 0 0 7px #3a1119, inset 0 0 0 8px rgba(201,162,78,.65); overflow: hidden; }
+.door-arch-inner { height: 100%; border-radius: inherit; position: relative;
+  background: radial-gradient(circle, rgba(201,162,78,.28) 1px, transparent 1.6px) 0 0 / 20px 20px, linear-gradient(180deg, rgba(0,0,0,.18), rgba(201,162,78,.06)); }
+.door-figure { position: absolute; left: 50%; top: 24%; width: min(30%, 190px); transform: translateX(-50%); flex-direction: column; align-items: center; z-index: 2; }
+.door-figure-glow { position: absolute; left: 50%; top: 45%; width: 190%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, rgba(230,199,126,.28), transparent 65%); }
+.door-studs { position: absolute; left: 0; right: 0; bottom: 6%; height: 38%;
+  background: radial-gradient(circle, #e6c77e 0 3px, transparent 3.6px) 0 0 / 36px 36px; opacity: .85; }
+.door-knob { position: absolute; top: 50%; width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff1c4, #c9a24e 55%, #7c5a1e); box-shadow: 0 3px 8px rgba(0,0,0,.5); }
+.door-seal { width: min(90vw, 440px); text-align: center; padding: 38px 24px 34px; border-radius: 30px; color: var(--ivory);
+  background: radial-gradient(circle at 50% 0%, #5c1c2a, #2a0d13 78%); border: 2px solid #c9a24e; outline: 1px solid rgba(230,199,126,.55); outline-offset: 7px; box-shadow: 0 30px 90px rgba(0,0,0,.6); }
+.seal-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 22px; border-radius: 999px; border: 1px solid rgba(230,199,126,.7); color: var(--goldlight); font-size: 17px; transition: background .2s, transform .2s; }
+.seal-btn:hover { background: rgba(230,199,126,.14); transform: translateY(-1px); }
+.seal-btn-primary { background: linear-gradient(135deg, #f1d58e, #c9a24e 60%, #a87f35); color: #2a0d13; border-color: transparent; font-weight: 600; }
+.seal-btn-primary:hover { background: linear-gradient(135deg, #f6dfa0, #d3ac58 60%, #b38a3d); }
+
+/* ---------- ivory sections ---------- */
+.invite-section, .couple-section { overflow: hidden; }
+.invite-card { background: linear-gradient(145deg, rgba(255,253,248,.96), rgba(247,239,225,.92)); border: 1px solid rgba(185,151,91,.55); border-radius: 2rem; box-shadow: 0 24px 70px rgba(74,48,31,.12); position: relative; }
+.invite-card::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(185,151,91,.3); border-radius: 1.55rem; pointer-events: none; }
+.arch-frame { padding: 10px 10px 14px; border-radius: 999px 999px 2rem 2rem; background: linear-gradient(160deg, #fff6dc, #d9b878 45%, #fff2cc 70%, #b98f45); box-shadow: 0 30px 60px rgba(60,35,15,.28); }
+.arch-frame > div:first-child { background: #fbf7ef; }
+.profile-card { background: linear-gradient(145deg, #fffdf8, #f6ecd9); border: 1px solid rgba(185,151,91,.55); border-radius: 1.6rem; padding: 16px 16px 20px; text-align: center; box-shadow: 0 22px 50px rgba(74,48,31,.16); }
+.royal-card { background: linear-gradient(145deg, rgba(255,253,248,.98), rgba(247,239,225,.92)); border: 1px solid rgba(185,151,91,.48); border-radius: 4px 24px 4px 24px; box-shadow: 0 12px 34px rgba(64,39,35,.08); }
+.venue-card { background: linear-gradient(145deg, #fffdf8, #f4e8d6); border: 1px solid rgba(185,151,91,.5); border-radius: 2rem; box-shadow: 0 18px 55px rgba(91,61,42,.12); }
+
+/* ---------- dark bands ---------- */
+main > section.section-wine { background: radial-gradient(ellipse at 50% 0%, #5a1f2e 0%, #3a1119 55%, #2a0d13 100%); color: var(--ivory); }
+main > section.section-emerald { background: radial-gradient(ellipse at 50% 100%, #1d5547 0%, #14382f 60%, #0e2822 100%); color: var(--ivory); overflow: hidden; }
+.footer-night { background: linear-gradient(180deg, #2a0d13, #1b080c); }
+.story-card { background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); border: 1px solid rgba(230,199,126,.4); border-radius: 4px 24px 4px 24px; box-shadow: 0 18px 40px rgba(0,0,0,.3); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+
+/* ---------- events: date coins + card ---------- */
+.coin { width: 58px; height: 76px; border-radius: 999px 999px 14px 14px; border: 1.5px solid rgba(185,151,91,.65); background: #fffdf8; color: var(--brown); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.05; transition: transform .3s, background .3s, color .3s, box-shadow .3s; }
+.coin-num { font-size: 26px; font-weight: 600; }
+.coin-day { font-size: 14px; font-style: italic; color: var(--gold); }
+.coin.is-on { background: linear-gradient(160deg, #f1d58e, #c9a24e 60%, #a87f35); color: #2a0d13; transform: translateY(-8px) scale(1.07); box-shadow: 0 14px 26px rgba(120,80,20,.35); }
+.coin.is-on .coin-day { color: #4a1722; }
+.coin.is-main:not(.is-on) { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(185,151,91,.25); }
+@media (min-width: 640px) { .coin { width: 72px; height: 94px; } .coin-num { font-size: 32px; } }
+.event-card { background: linear-gradient(145deg, #fffdf8, #f6ecd9); border: 1px solid rgba(185,151,91,.6); border-radius: 4px 28px 4px 28px; padding: 26px 26px 18px; box-shadow: 0 22px 55px rgba(74,48,31,.16); transform-origin: 50% 50%; }
+.event-card.is-main { background: linear-gradient(145deg, #fff6dd, #f1dfb7); border-color: var(--gold); }
+
+/* ---------- countdown flip digits ---------- */
+.flip-card { position: relative; display: flex; align-items: center; justify-content: center; height: 100px; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(180deg, #4a1722 0%, #3a1119 50%, #2f0d15 50%, #3a1119 100%); border: 1px solid rgba(230,199,126,.5); box-shadow: 0 16px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.12); }
+.flip-num { display: block; font-size: 3.4rem; font-weight: 600; color: var(--goldlight); font-variant-numeric: tabular-nums; line-height: 1; }
+.flip-line { position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: rgba(0,0,0,.55); box-shadow: 0 1px 0 rgba(255,255,255,.08); pointer-events: none; }
+@media (min-width: 768px) { .flip-card { height: 124px; } .flip-num { font-size: 4.4rem; } }
+
+/* ---------- gallery ---------- */
+.gallery-frame { padding: 8px; border-radius: 1.2rem; background: linear-gradient(160deg, #fff1c8, #c9a24e 50%, #f3dc9c 75%, #a87f35); box-shadow: 0 30px 60px rgba(0,0,0,.5); display: block; }
+.round-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(230,199,126,.6); color: var(--goldlight); display: flex; align-items: center; justify-content: center; transition: background .2s; }
+.round-btn:hover { background: rgba(230,199,126,.16); }
+
+/* ---------- floating tools ---------- */
+.royal-fab { display: flex; align-items: center; gap: 9px; padding: 11px 16px; border: 1px solid rgba(230,199,126,.75); border-radius: 999px; background: rgba(42,13,19,.95); color: #fffaf1; box-shadow: 0 8px 22px rgba(53,30,30,.28); font-size: 14px; letter-spacing: .03em; transition: transform .2s, background .2s; }
+.royal-fab:hover { transform: translateY(-2px); background: #5a1f2b; }
+.music-hint { max-width: 230px; padding: 9px 12px; border-radius: 12px; background: #fffaf1; border: 1px solid var(--gold); font-size: 13px; box-shadow: 0 5px 20px rgba(0,0,0,.1); }
+@media (max-width: 640px) { .royal-fab { padding: 10px 13px; } .royal-fab span { font-size: 13px; } }
+
+/* ---------- accessibility ---------- */
+a:focus-visible, button:focus-visible { outline: 2px solid var(--goldlight); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .petal, .wedding-video-bg video, .spin-slow, .hero-mandala { display: none; }
+  .wedding-nav-link, .wedding-nav-link::after, .wedding-mobile-link, .royal-fab, .coin, .hero-cta { transition: none; }
+}
