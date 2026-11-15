@@ -202,11 +202,11 @@ const Couple = () => (
       </div>
     </Tilt>
     <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10">
-      <Profile id="groom" name={w.groom} label="The Groom" hi="वर" src={w.images.groom} />
+      <Profile id="groom" name={w.groom} label="The Groom"  src={w.images.groom} />
       <motion.div animate={{ scale: [1, 1.12, 1] }} transition={{ repeat: Infinity, duration: 2.4 }} className="relative shrink-0">
         <Heart className="w-12 h-12 text-[#d98b94] fill-[#e9b3b8]" /><Flower2 className="w-5 h-5 text-brown absolute inset-0 m-auto" />
       </motion.div>
-      <Profile id="bride" name={w.bride} label="The Bride" hi="वधू" src={w.images.bride} />
+      <Profile id="bride" name={w.bride} label="The Bride" src={w.images.bride} />
     </div>
   </Section>
 );
