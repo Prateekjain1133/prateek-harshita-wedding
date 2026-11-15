@@ -33,7 +33,7 @@ images: {
     { date: '11 December 2026', title: 'The Wedding Day', text: 'We look forward to celebrating this special day with you. Your presence and blessings will make it even more memorable.' }
   ],
   venue: {
-    name: 'Radharani Marrige garden', address: 'Susner road, Modi, Madhya Pradesh 465447',
+    name: 'Radharani Marriage garden', address: 'Susner road, Modi, Madhya Pradesh 465447',
     // Exact coordinates resolved from the user's Google Maps pin:
     directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=23.996436%2C76.200344',
     embedUrl: 'https://maps.google.com/maps?q=23.996436%2C76.200344&z=16&output=embed',
